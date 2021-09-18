@@ -1,17 +1,12 @@
-from azure.cognitiveservices.vision.customvision.training import CustomVisionTrainingClient
-from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
-from azure.cognitiveservices.vision.customvision.training.models import ImageFileCreateBatch, ImageFileCreateEntry, Region
-from msrest.authentication import ApiKeyCredentials
+
 import cv2
-from os import walk
 
 import PIL
 from PIL import Image,ImageTk
 from tkinter import *
 
-from matplotlib import  pyplot as pt
-from matplotlib.image import  imread
-from matplotlib.patches import Rectangle
+from matplotlib import pyplot as pt
+from matplotlib.image import imread
 from control.control import Control
 
 control=Control()
