@@ -1,7 +1,6 @@
-#Im amment
+#Main thread for starting the gui
 
 import cv2
-
 import PIL
 from PIL import Image,ImageTk
 from tkinter import *
@@ -9,14 +8,15 @@ from tkinter import *
 from matplotlib import pyplot as pt
 from matplotlib.image import imread
 from control.control import Control
-
 control=Control()
 
-
+#gives the indtruction for saving the current frame
 def takePicture():
     global setImage
     setImage=True
 
+#add the rectangles to the image where the IA found a products
+#**ARGS: List with the triangles
 def addRectangles (locations):
     _, axe = pt.subplots()
     img=imread("hola.jpg")
@@ -29,33 +29,35 @@ def addRectangles (locations):
     pt.savefig('result.png')
 
 
-
-
+#window metric
 width, height = 800, 700
 
+#we use open cv to take the frames
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
+#UI elementes
 root = Tk()
 root.bind('<Escape>', lambda e: root.quit())
 lmain = Label(root)
 lmain.pack()
 lProccessedData = Label(root)
 lProccessedData.pack()
-B = Button( text ="Hello", command = takePicture)
+B = Button( text ="Start", command = takePicture)
 B.pack()
 textEditor = Text(root, width=43, height=5)
 textEditor.pack()
 textEditor.place(x=400, y=400)
 
+#Initial wigets state
 setImage=False
 selectedImage=None
-#lmain.config(width=300, height=300)
 root.geometry("900x600")
 root.resizable(False, False)
 
-
+#set the total price
+#**ARGS: List with all the products found
 def set_count(products):
     div={"Harina de Trigo La Nieve":1700,"Papitas margarita":1000,"Lentejas":1800,"Shampoo":13900,"Tarrito rojo":13000,"Polvo de bizcocho":2000}
     div_temp=[]
@@ -76,6 +78,7 @@ def set_count(products):
 
     textEditor.insert('1.0', a)
 
+#show the frame captured by the camera
 def show_frame():
     global setImage
     global selectedImage
@@ -108,9 +111,7 @@ def show_frame():
     lProccessedData.place(x=470, y=40)
     lProccessedData.configure(image=selectedImage)
 
-
-
-
+#Start UI
 show_frame()
 root.mainloop()
 

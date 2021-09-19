@@ -1,3 +1,7 @@
+#******************************************************************
+#CLass created to hold the images characteristics
+#******************************************************************
+
 class ImageData:
 
     def __init__(self,originPath,name,label,image):
